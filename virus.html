@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        /* Remover background-color daqui para permitir animação */
+        /* background-color: #f8d7da; */
+        color: #721c24;
+        padding: 20px;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        max-width: 600px;
+        margin: 50px auto;
+        transition: background-color 0.2s linear;
+      }
+      h1 {
+        text-align: center;
+      }
+      p {
+        font-size: 18px;
+        line-height: 1.6;
+      }
+      .hora-abertura {
+        margin-top: 24px;
+        text-align: center;
+        font-size: 16px;
+        color: #721c24;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cuidado!</h1>
+    <p>
+      Isso foi uma atividade acadêmica, feita para instruir sobre o uso de
+      phishing para enganar e roubar pessoas. Fique atento aos emails recebidos
+      e sempre cheque as fontes antes de clicar em qualquer link.
+    </p>
+    <div class="hora-abertura" id="horaAbertura"></div>
+    <script>
+      // Animação de branco para vermelho gradualmente
+      (function () {
+        let step = 0;
+        const steps = 100;
+        const interval = 15; // ms
+        function lerp(a, b, t) {
+          return Math.round(a + (b - a) * t);
+        }
+        function animateBg() {
+          step++;
+          const t = Math.min(step / steps, 1);
+          // Branco: rgb(255,255,255) -> Vermelho: rgb(248, 215, 218)
+          // Ou para vermelho puro: rgb(255,0,0)
+          // Usando o vermelho suave do original:
+          const r = lerp(255, 248, t);
+          const g = lerp(255, 215, t);
+          const b = lerp(255, 218, t);
+          document.body.style.backgroundColor = `rgb(${r},${g},${b})`;
+          if (step < steps) {
+            requestAnimationFrame(animateBg);
+          }
+        }
+        // Começa branco
+        document.body.style.backgroundColor = "rgb(255,255,255)";
+        window.addEventListener("DOMContentLoaded", () => {
+          requestAnimationFrame(animateBg);
+        });
+      })();
+      // Mostrar hora de abertura da página
+      window.addEventListener("DOMContentLoaded", () => {
+        const horaDiv = document.getElementById("horaAbertura");
+        const agora = new Date();
+        const horaStr = agora.toLocaleTimeString();
+        horaDiv.textContent = "Página aberta às " + horaStr;
+      });
+    </script>
+  </body>
+</html>
